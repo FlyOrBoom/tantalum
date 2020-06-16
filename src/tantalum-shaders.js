@@ -322,20 +322,23 @@ var Shaders = {
         'void intersect(Ray ray, inout Intersection isect) {\n'                            +
         '    bboxIntersect(ray, vec2(0.0), vec2(1.78, 1.0), 0.0, isect);\n\n'              +
 
-        '    biconcaveLensIntersect  (ray, vec2( 0.2, 0.0), 0.2, 0.02, 0.75, 0.75, 1.0, i' +
+        '    biconcaveLensIntersect  (ray, vec2( 0.2, 0.1), 0.2, 0.02, 0.75, 0.75, 1.0, i' +
                                                                               'sect);\n'   +
-        '    biconcaveLensIntersect  (ray, vec2(-0.2, 0.0), 0.2, 0.02, 0.75, 0.75, 1.0, i' +
+        '    biconcaveLensIntersect  (ray, vec2(-0.2, 0.1), 0.2, 0.02, 0.75, 0.75, 1.0, i' +
                                                                               'sect);\n'   +
-        '    biconvexLensIntersectH   (ray, vec2( 0,   0.0), 0.15, 0.02, 0.75, 0.75, 1.0,' +
+        '    biconvexLensIntersectH   (ray, vec2( 0, 0.1), 0.75, 0.02, 0.75, 0.75, 1.0,' +
                                                                             ' isect);\n\n' +
+        '    segmentCollapse(segmentIntersection(\n'                    +
+        '        vertSpanIntersect(ray, -0.2, 0.2),\n'                                    +
+        '        sphereSegmentIntersect(ray, vec2(0,-0.5),0.2)\n'             +
+        '    ), 1.0, isect);\n'                                                           +
 
-        '    meniscusLensIntersect   (ray, vec2( 0.8, 0.0), 0.375, 0.15,   0.45, 0.75, 1.' +
-                                                                          '0, isect);\n\n' +
+        '    segmentCollapse(segmentIntersection(\n'                    +
+        '        vertSpanIntersect(ray, 0.1, 0.1),\n'                                    +
+        '        sphereSegmentIntersect(ray, vec2(0,-0.7),0.2)\n'             +
+        '    ), 1.0, isect);\n'                                                           +
 
-        '    prismIntersect(ray, vec2(0.0, 0.8), 0.2, 1.0, isect);\n\n'                    +
-
-        '    planoConvexLensIntersect(ray, vec2(-1.2, 0.0), 0.375, 0.075,  0.75,       1.' +
-                                                                          '0, isect);\n\n' +
+        '    prismIntersect(ray, vec2(0.0, 0.75), 0.2, 1.0, isect);\n\n'                    +
 
         '}\n\n'                                                                            +
 
@@ -346,7 +349,7 @@ var Shaders = {
                                                          '96, 147.4688), lambda)/1.4;\n'   +
         '        return sampleDielectric(state, wiLocal, ior);\n'                          +
         '    } else {\n'                                                                   +
-        '        throughput *= vec3(0.5);\n'                                               +
+        '        throughput *= vec3(0.001);\n'                                               +
         '        return sampleDiffuse(state, wiLocal);\n'                                  +
         '    }\n'                                                                          +
         '}\n',
