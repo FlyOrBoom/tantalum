@@ -328,9 +328,9 @@
             this.angularSpread = [0.0, Math.PI*2.0];
             break;
         case Renderer.SPREAD_CONE:
-            this.emitterPower = 0.03;
+            this.emitterPower = 0.1;
             this.spatialSpread = 0.0;
-            this.angularSpread = [this.emitterAngle, Math.PI*0.3];
+            this.angularSpread = [this.emitterAngle, Math.PI/100];
             break;
         case Renderer.SPREAD_BEAM:
             this.emitterPower = 0.03;

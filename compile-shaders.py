@@ -7,7 +7,7 @@ MaxLen = 80;
 
 entries = []
 for file in os.listdir(ShaderDir):
-    if file.find(".txt") == -1:
+    if ( file[0] == '.' ) or ( file.find('.txt') == -1 ):
         continue;
     
     lines = open(os.path.join(ShaderDir, file)).read().strip().split('\n')
